@@ -1,0 +1,100 @@
+elasticsearch:
+  build: elasticsearch/.
+  volumes:
+   - ../run/elasticsearch/config:/etc/elasticsearch
+  volumes_from:
+   - elasticsearchdata
+  ports:
+   - "9200:9200"
+
+graphite:
+  build: graphite/.
+  volumes_from:
+   - graphitedata
+  ports:
+   - "2003:2003"
+   - "8888:80"
+  volumes:
+   - ../run/graphite/conf:/etc/carbon
+
+grafana:
+  build: grafana/.
+  links:
+   - elasticsearch
+   - graphite
+  volumes:
+   - ../run/grafana/config:/config
+
+kibana:
+  build: kibana/.
+  links:
+   - elasticsearch
+  volumes:
+   - ../run/kibana/config:/config
+
+logstash:
+  build: logstash/.
+  links:
+   - elasticsearch
+  volumes:
+   - ../run/logstash/config:/etc/logstash/conf.d
+   - ../run/logstash/mib:/etc/logstash/mib
+   - ../run/logstash/ssl:/etc/pki/tls
+  ports:
+   - "5000:5000/udp"
+   - "5001:5001"
+
+sensu:
+  build: sensu/.
+  links:
+   - graphite
+  volumes:
+   - ../run/sensu/sensu-conf:/etc/sensu/conf.d
+   - ../run/sensu/rabbitmq-conf:/etc/rabbitmq
+  ports:
+   - "5671:5671"
+
+uchiwa:
+  image: uchiwa/uchiwa
+  links:
+   - sensu
+  volumes:
+   - ../run/uchiwa:/config
+  ports:
+   - "3030:3000"
+
+sensuclient:
+  build: sensu-client/.
+  links:
+   - sensu
+  volumes:
+   - ../run/sensu-client/config:/etc/sensu/conf.d
+   - ../run/sensu-client/plugins:/etc/sensu/plugins
+
+cadvisor:
+  image: google/cadvisor
+  volumes:
+   - /:/rootfs:ro
+   - /var/run:/var/run:rw
+   - /sys:/sys:ro
+   - /var/lib/docker/:/var/lib/docker:ro
+  ports:
+   - "4242:8080"
+
+ncsmonitoringproxy:
+  build: proxy
+  links:
+   - uchiwa
+   - grafana
+   - kibana
+  volumes:
+   - ../run/proxy/config/sites-enabled:/etc/nginx/sites-enabled
+   - ../run/proxy/config/html:/usr/share/nginx/html
+  ports:
+   - "8080:80"
+
+elasticsearchdata:
+  build: elasticsearchdata/.
+
+graphitedata:
+  build: graphitedata/.
