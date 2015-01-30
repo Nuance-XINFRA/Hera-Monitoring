@@ -28,5 +28,5 @@ All your data (dashboards, metrics and logs) are stored inside [Data Volume Cont
 Be careful to always use the one you really want to avoid data loss.
 
 ## Credits
-* Author & Maintainers: [Brice Argenson](https://github.com/bargenson/), [Sylvain Boily](https://github.com/djsly/)
+* Authors & Maintainers: [Brice Argenson](https://github.com/bargenson/), [Sylvain Boily](https://github.com/djsly/)
 * Contributors: You? :-)
