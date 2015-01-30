@@ -1,5 +1,5 @@
 elasticsearch:
-  image: mtl-mobi-registry:5000/elasticsearch
+  image: nuancemobility/elasticsearch
   volumes:
    - ./elasticsearch/config:/etc/elasticsearch
   volumes_from:
@@ -8,7 +8,7 @@ elasticsearch:
    - "9200:9200"
 
 graphite:
-  image: mtl-mobi-registry:5000/graphite
+  image: nuancemobility/graphite
   volumes_from:
    - ncsmonitoring_graphitedata_1
   ports:
@@ -18,7 +18,7 @@ graphite:
    - ./graphite/conf:/etc/carbon
 
 grafana:
-  image: mtl-mobi-registry:5000/grafana
+  image: nuancemobility/grafana
   links:
    - elasticsearch
    - graphite
@@ -26,14 +26,14 @@ grafana:
    - ./grafana/config:/config
 
 kibana:
-  image: mtl-mobi-registry:5000/kibana
+  image: nuancemobility/kibana
   links:
    - elasticsearch
   volumes:
    - ./kibana/config:/config
 
 logstash:
-  image: mtl-mobi-registry:5000/logstash
+  image: nuancemobility/logstash
   links:
    - elasticsearch
   volumes:
@@ -45,7 +45,7 @@ logstash:
    - "5001:5001"
 
 sensu:
-  image: mtl-mobi-registry:5000/sensu
+  image: nuancemobility/sensu
   links:
    - graphite
   volumes:
@@ -64,7 +64,7 @@ uchiwa:
    - "3030:3000"
 
 sensuclient:
-  image: mtl-mobi-registry:5000/sensuclient
+  image: nuancemobility/sensuclient
   links:
    - sensu
   volumes:
@@ -82,7 +82,7 @@ cadvisor:
    - "4242:8080"
 
 ncsmonitoringproxy:
-  image: mtl-mobi-registry:5000/ncsmonitoringproxy
+  image: nuancemobility/ncsmonitoringproxy
   links:
    - uchiwa
    - grafana
