@@ -14,18 +14,19 @@ To Run the stack using images from the official Docker Registry:
 	fig -p heramonitoring up -d
 
 
-If you want to change the Dockerfile, make your own builds and run your own images:
+If you want to change the Dockerfiles, make your own builds and run your own images:
 
 	cd ./build
 	fig -p heramonitoring up -d
 
 ##Monitoring Data
 
-All your data (dashboards, metrics and logs) are stored inside [Data Volume Containers](https://docs.docker.com/userguide/dockervolumes/#creating-and-mounting-a-data-volume-container). When you remove them, you are also removing all the data contained inside. That's why, you have two different Fig files to Run the stack using images from the official Docker Registry:
+All your data (dashboards, metrics and logs) are stored inside [Data Volume Containers](https://docs.docker.com/userguide/dockervolumes/#creating-and-mounting-a-data-volume-container). When you remove them, you are also removing all the data contained inside. That's why, you have two different *Fig* files to run the stack using images from the official Docker Registry:
 * One to create, recreate, start, stop remove containers running the services
 * One to create, recreate, start, stop remove containers containing your important data
+
 Be careful to always use the one you really want to avoid data loss.
 
 ## Credits
-* Author & Maintainers: [Brice Argenson][bargenson], [Sylvain Boily][djsly]
+* Author & Maintainers: [Brice Argenson](bargenson), [Sylvain Boily](djsly)
 * Contributors: You? :-)
