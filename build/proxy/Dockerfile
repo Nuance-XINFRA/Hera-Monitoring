@@ -1,4 +1,4 @@
-FROM 		mtl-mobi-registry:5000/ubuntu-base:14.04
+FROM 		nuancemobility/ubuntu-base:14.04
 MAINTAINER 	Brice Argenson <brice.argenson@nuance.com>
 
 RUN 		apt-get install -y nginx && \
