@@ -1,0 +1,8 @@
+{
+  "retentions": [
+    {
+      "prefix": "logstash-",
+      "days": 14
+    }
+  ]
+}

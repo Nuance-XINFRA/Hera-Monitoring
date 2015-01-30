@@ -1,0 +1,5 @@
+elasticsearchdata:
+  image: mtl-mobi-registry:5000/elasticsearchdata
+
+graphitedata:
+  image: mtl-mobi-registry:5000/graphitedata

@@ -1,0 +1,8 @@
+{
+  "relay": {
+    "graphite": {
+      "host": "graphite",
+      "port": 2003
+    }
+  }
+}

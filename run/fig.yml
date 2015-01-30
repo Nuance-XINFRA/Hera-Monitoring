@@ -1,0 +1,94 @@
+elasticsearch:
+  image: mtl-mobi-registry:5000/elasticsearch
+  volumes:
+   - ./elasticsearch/config:/etc/elasticsearch
+  volumes_from:
+   - ncsmonitoring_elasticsearchdata_1
+  ports:
+   - "9200:9200"
+
+graphite:
+  image: mtl-mobi-registry:5000/graphite
+  volumes_from:
+   - ncsmonitoring_graphitedata_1
+  ports:
+   - "2003:2003"
+   - "8888:80"
+  volumes:
+   - ./graphite/conf:/etc/carbon
+
+grafana:
+  image: mtl-mobi-registry:5000/grafana
+  links:
+   - elasticsearch
+   - graphite
+  volumes:
+   - ./grafana/config:/config
+
+kibana:
+  image: mtl-mobi-registry:5000/kibana
+  links:
+   - elasticsearch
+  volumes:
+   - ./kibana/config:/config
+
+logstash:
+  image: mtl-mobi-registry:5000/logstash
+  links:
+   - elasticsearch
+  volumes:
+   - ./logstash/config:/etc/logstash/conf.d
+   - ./logstash/mib:/etc/logstash/mib
+   - ./logstash/ssl:/etc/pki/tls
+  ports:
+   - "5000:5000/udp"
+   - "5001:5001"
+
+sensu:
+  image: mtl-mobi-registry:5000/sensu
+  links:
+   - graphite
+  volumes:
+   - ./sensu/sensu-conf:/etc/sensu/conf.d
+   - ./sensu/rabbitmq-conf:/etc/rabbitmq
+  ports:
+   - "5671:5671"
+
+uchiwa:
+  image: uchiwa/uchiwa
+  links:
+   - sensu
+  volumes:
+   - ./uchiwa:/config
+  ports:
+   - "3030:3000"
+
+sensuclient:
+  image: mtl-mobi-registry:5000/sensuclient
+  links:
+   - sensu
+  volumes:
+   - ./sensu-client/config:/etc/sensu/conf.d
+   - ./sensu-client/plugins:/etc/sensu/plugins
+
+cadvisor:
+  image: google/cadvisor
+  volumes:
+   - /:/rootfs:ro
+   - /var/run:/var/run:rw
+   - /sys:/sys:ro
+   - /var/lib/docker/:/var/lib/docker:ro
+  ports:
+   - "4242:8080"
+
+ncsmonitoringproxy:
+  image: mtl-mobi-registry:5000/ncsmonitoringproxy
+  links:
+   - uchiwa
+   - grafana
+   - kibana
+  volumes:
+   - ./proxy/config/sites-enabled:/etc/nginx/sites-enabled
+   - ./proxy/config/html:/usr/share/nginx/html
+  ports:
+   - "8080:80"

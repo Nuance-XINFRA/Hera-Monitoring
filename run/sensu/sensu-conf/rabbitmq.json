@@ -1,0 +1,9 @@
+{
+  "rabbitmq": {
+    "host": "localhost",
+    "port": 5671,
+    "vhost": "/",
+    "user": "guest",
+    "password": "guest"
+  }
+}

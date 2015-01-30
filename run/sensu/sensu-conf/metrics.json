@@ -1,0 +1,22 @@
+{
+  "checks": {
+    "ServiceA-SNMP-Metrics": {
+      "type": "metric",
+      "command": "snmp-metrics-collector.rb -P 7161 -c serviceA",
+      "interval": 60,
+      "subscribers": [
+        "ncs"
+      ],
+      "handlers": ["relay"]
+    },
+    "ServiceB-SNMP-Metrics": {
+      "type": "metric",
+      "command": "snmp-metrics-collector.rb -P 7161 -c serviceB",
+      "interval": 60,
+      "subscribers": [
+        "ncs"
+      ],
+      "handlers": ["relay"]
+    }
+  }
+}

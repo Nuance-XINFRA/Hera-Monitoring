@@ -1,0 +1,18 @@
+server {
+	listen 80;
+	root /usr/share/nginx/html;
+
+	server_name boot2docker;
+
+	location /grafana/ {
+		proxy_pass http://grafana/;
+	}
+
+	location /kibana/ {
+		proxy_pass http://kibana/;
+	}
+
+	location /uchiwa/ {
+		proxy_pass http://uchiwa:3000/;
+	}
+}
