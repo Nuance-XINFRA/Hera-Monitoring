@@ -3,14 +3,14 @@ elasticsearch:
   volumes:
    - ./elasticsearch/config:/etc/elasticsearch
   volumes_from:
-   - ncsmonitoring_elasticsearchdata_1
+   - heramonitoring_elasticsearchdata_1
   ports:
    - "9200:9200"
 
 graphite:
   image: nuancemobility/graphite
   volumes_from:
-   - ncsmonitoring_graphitedata_1
+   - heramonitoring_graphitedata_1
   ports:
    - "2003:2003"
    - "8888:80"
@@ -64,7 +64,7 @@ uchiwa:
    - "3030:3000"
 
 sensuclient:
-  image: nuancemobility/sensuclient
+  image: nuancemobility/sensu-client
   links:
    - sensu
   volumes:
@@ -81,8 +81,8 @@ cadvisor:
   ports:
    - "4242:8080"
 
-ncsmonitoringproxy:
-  image: nuancemobility/ncsmonitoringproxy
+heramonitoringproxy:
+  image: nuancemobility/hera-monitoring-proxy
   links:
    - uchiwa
    - grafana

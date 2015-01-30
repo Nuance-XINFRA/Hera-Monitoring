@@ -1,5 +1,5 @@
 elasticsearchdata:
-  image: mtl-mobi-registry:5000/elasticsearchdata
+  image: nuancemobility/elasticsearch-data
 
 graphitedata:
-  image: mtl-mobi-registry:5000/graphitedata
+  image: nuancemobility/graphite-data

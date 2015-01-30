@@ -81,7 +81,7 @@ cadvisor:
   ports:
    - "4242:8080"
 
-ncsmonitoringproxy:
+heramonitoringproxy:
   build: proxy
   links:
    - uchiwa
