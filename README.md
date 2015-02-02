@@ -2,7 +2,9 @@
 
 *Héra Monitoring* is a ready to use / easy to use Monitoring stack running with [Docker](https://www.docker.com/), composed of [Logstash](http://logstash.net/)/[Kibana](http://www.elasticsearch.org/overview/kibana/) for log management, [Graphite](http://graphite.wikidot.com/)/[Grafana](http://grafana.org/) as scalable real-time graphing system and [Sensu](http://sensuapp.org/)/[Uchiwa](https://github.com/sensu/uchiwa) as monitoring framework.
 
+
 ![Architecture](https://raw.githubusercontent.com/Nuance-Mobility/Hera-Monitoring/master/Architecture.png)
+
 
 ## Getting Started
 
