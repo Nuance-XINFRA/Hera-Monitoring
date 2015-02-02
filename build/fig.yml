@@ -4,8 +4,6 @@ elasticsearch:
    - ../run/elasticsearch/config:/etc/elasticsearch
   volumes_from:
    - elasticsearchdata
-  ports:
-   - "9200:9200"
 
 graphite:
   build: graphite/.
@@ -13,22 +11,16 @@ graphite:
    - graphitedata
   ports:
    - "2003:2003"
-   - "8888:80"
   volumes:
    - ../run/graphite/conf:/etc/carbon
 
 grafana:
   build: grafana/.
-  links:
-   - elasticsearch
-   - graphite
   volumes:
    - ../run/grafana/config:/config
 
 kibana:
   build: kibana/.
-  links:
-   - elasticsearch
   volumes:
    - ../run/kibana/config:/config
 
@@ -78,20 +70,24 @@ cadvisor:
    - /var/run:/var/run:rw
    - /sys:/sys:ro
    - /var/lib/docker/:/var/lib/docker:ro
-  ports:
-   - "4242:8080"
 
-heramonitoringproxy:
+monitoringproxy:
   build: proxy
   links:
    - uchiwa
    - grafana
    - kibana
+   - elasticsearch
+   - cadvisor
+   - graphite
   volumes:
    - ../run/proxy/config/sites-enabled:/etc/nginx/sites-enabled
    - ../run/proxy/config/html:/usr/share/nginx/html
+   - ../run/proxy/config/ssl:/etc/nginx/ssl
   ports:
-   - "8080:80"
+   - "443:443"
+   - "8080:8080"
+   - "4242:4242"
 
 elasticsearchdata:
   build: elasticsearchdata/.

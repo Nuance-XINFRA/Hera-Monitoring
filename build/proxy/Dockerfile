@@ -5,7 +5,8 @@ RUN 		apt-get install -y nginx && \
 			sed -i 's|user www-data;|daemon off;|g' /etc/nginx/nginx.conf
 
 VOLUME 		/etc/nginx/sites-enabled
-VOLUME 		/usr/share/nginx/html			
+VOLUME 		/usr/share/nginx/html
+VOLUME 		/etc/nginx/ssl			
 
 EXPOSE 		80
 

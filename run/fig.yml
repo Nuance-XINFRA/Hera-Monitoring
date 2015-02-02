@@ -3,9 +3,7 @@ elasticsearch:
   volumes:
    - ./elasticsearch/config:/etc/elasticsearch
   volumes_from:
-   - heramonitoring_elasticsearchdata_1
-  ports:
-   - "9200:9200"
+   - heramonitoring_elasticsearchdata_1   
 
 graphite:
   image: nuancemobility/graphite
@@ -13,22 +11,16 @@ graphite:
    - heramonitoring_graphitedata_1
   ports:
    - "2003:2003"
-   - "8888:80"
   volumes:
    - ./graphite/conf:/etc/carbon
 
 grafana:
   image: nuancemobility/grafana
-  links:
-   - elasticsearch
-   - graphite
   volumes:
    - ./grafana/config:/config
 
 kibana:
   image: nuancemobility/kibana
-  links:
-   - elasticsearch
   volumes:
    - ./kibana/config:/config
 
@@ -78,17 +70,21 @@ cadvisor:
    - /var/run:/var/run:rw
    - /sys:/sys:ro
    - /var/lib/docker/:/var/lib/docker:ro
-  ports:
-   - "4242:8080"
 
-heramonitoringproxy:
+monitoringproxy:
   image: nuancemobility/hera-monitoring-proxy
   links:
    - uchiwa
    - grafana
    - kibana
+   - elasticsearch
+   - cadvisor
+   - graphite
   volumes:
    - ./proxy/config/sites-enabled:/etc/nginx/sites-enabled
    - ./proxy/config/html:/usr/share/nginx/html
+   - ./proxy/config/ssl:/etc/nginx/ssl
   ports:
-   - "8080:80"
+   - "443:443"
+   - "8080:8080"
+   - "4242:4242"

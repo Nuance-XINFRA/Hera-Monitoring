@@ -40,11 +40,11 @@ define(['settings'], function(Settings) {
       datasources: {
         graphite: {
           type: 'graphite',
-          url: "http://" + window.location.hostname + ":8888",
+          url: "https://" + window.location.hostname + ":8080",
         },
         elasticsearch: {
           type: 'elasticsearch',
-          url: "http://" + window.location.hostname + ":9200",
+          url: "https://" + window.location.hostname + "/elasticsearch/",
           index: 'grafana-dash',
           grafanaDB: true,
         }

@@ -1,8 +1,11 @@
 server {
-	listen 80;
+	listen 443 ssl;
 	root /usr/share/nginx/html;
 
 	server_name boot2docker;
+
+	ssl_certificate     /etc/nginx/ssl/nginx.crt;
+    ssl_certificate_key /etc/nginx/ssl/nginx.key;
 
 	location /grafana/ {
 		proxy_pass http://grafana/;
@@ -14,5 +17,9 @@ server {
 
 	location /uchiwa/ {
 		proxy_pass http://uchiwa:3000/;
+	}
+
+	location /elasticsearch/ {
+		proxy_pass http://elasticsearch:9200/;
 	}
 }

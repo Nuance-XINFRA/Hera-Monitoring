@@ -27,6 +27,41 @@ All your data (dashboards, metrics and logs) are stored inside [Data Volume Cont
 
 Be careful to always use the one you really want to avoid data loss.
 
+## Configuration
+
+### Elasticsearch
+
+You'll find several configuration files in the /run/elasticsearch folder:
+* *elasticsearch.yml*: This is the Elasticsearch Configuration file. The one we provide just add the support for HTTP Cross Domain requests.
+* *curator.json*: This is a configuration file to configure your data retention in ElasticSearch. The one we provide specify a retention of 14 days for the Logstash data.
+* *logging.yml*: The logging configuration file. The one we provide is the default one provided by ElasticSearch.
+
+### Grafana
+
+You'll find only one configuration file in the /run/grafana folder:
+* *config.js*: This is the Grafana Configuration file. The one we provide specify the correct host/port for the other services Grafana needs to communicate with.
+
+### Graphite
+
+You'll find several configuration files in the /run/graphite folder:
+* *carbon.conf*: This is the Carbon (the backend use by Graphite) Configuration file. The one we provide should be good for most of the cases but feel free to customize it.
+* *storage-schemas.conf*: Another Carbon Configuration file. This one is useful to configure the retentions of your Graphite data.
+
+### Kibana
+
+You'll find only one configuration file in the /run/kibana folder:
+* *config.js.*: This is the Kibana Configuration file. The one we provide specify the correct host/port for the other services Kibana needs to communicate with.
+
+### Logstash
+
+### Monitoring Proxy (nginx)
+
+### Sensu
+
+### Sensu Client
+
+### Uchiwa
+
 ## Credits
 * Authors & Maintainers: [Brice Argenson](https://github.com/bargenson/), [Sylvain Boily](https://github.com/djsly/)
 * Contributors: You? :-)
