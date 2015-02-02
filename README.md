@@ -33,7 +33,7 @@ Be careful to always use the one you really want to avoid data loss.
 
 ## Configuration
 
-You'll find several configuration files in /run/<service_name> folders:
+You'll find several configuration files in /run/*service_name* folders:
 
 ### Elasticsearch
 
@@ -43,7 +43,7 @@ You'll find several configuration files in /run/<service_name> folders:
 
 ### Grafana
 
-* *config.js*: This is the Grafana Configuration file. The one we provide specify the correct host/port for the other services Grafana needs to communicate with.
+* *config.js*: This is the Grafana configuration file. The one we provide specify the correct host/port for the other services Grafana needs to communicate with.
 
 ### Graphite
 
@@ -52,7 +52,7 @@ You'll find several configuration files in /run/<service_name> folders:
 
 ### Kibana
 
-* *config.js.*: This is the Kibana Configuration file. The one we provide specify the correct host/port for the other services Kibana needs to communicate with.
+* *config.js.*: This is the Kibana configuration file. The one we provide specify the correct host/port for the other services Kibana needs to communicate with.
 
 ### Logstash
 
@@ -71,6 +71,8 @@ You'll find several configuration files in /run/<service_name> folders:
 ### Sensu Client
 
 ### Uchiwa
+
+* *config.js*: This is the Uchiwa configuration file.
 
 ## Credits
 * Authors & Maintainers: [Brice Argenson](https://github.com/bargenson/), [Sylvain Boily](https://github.com/djsly/)
