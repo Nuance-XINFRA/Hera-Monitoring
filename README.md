@@ -11,7 +11,7 @@
 In order to build/run the Héra Monitoring stack, you'll need to have Docker and Fig installed on your machine.
 Please look at the [Docker Installation Guide](https://docs.docker.com/installation/) and the [Fig Installation Guide](http://www.fig.sh/install.html) if you don't have them installed.
 
-To Run the stack using images from the official Docker Registry:
+To Run the stack using the images from the official Docker Registry:
 
 	cd ./run
 	fig -p heramonitoring -f data-containers.yml up -d
