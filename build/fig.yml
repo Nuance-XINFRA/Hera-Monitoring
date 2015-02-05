@@ -72,7 +72,7 @@ cadvisor:
    - /var/lib/docker/:/var/lib/docker:ro
 
 monitoringproxy:
-  build: proxy
+  build: nginx
   links:
    - uchiwa
    - grafana
@@ -81,9 +81,9 @@ monitoringproxy:
    - cadvisor
    - graphite
   volumes:
-   - ../run/proxy/config/sites-enabled:/etc/nginx/sites-enabled
-   - ../run/proxy/config/html:/usr/share/nginx/html
-   - ../run/proxy/config/ssl:/etc/nginx/ssl
+   - ../run/nginx/config:/config
+   - ../run/nginx/html:/usr/share/nginx/html
+   - ../run/nginx/ssl:/etc/nginx/ssl
   ports:
    - "443:443"
    - "8080:8080"

@@ -72,7 +72,7 @@ cadvisor:
    - /var/lib/docker/:/var/lib/docker:ro
 
 monitoringproxy:
-  image: nuancemobility/hera-monitoring-proxy
+  image: nuancemobility/nginx
   links:
    - uchiwa
    - grafana
@@ -81,9 +81,9 @@ monitoringproxy:
    - cadvisor
    - graphite
   volumes:
-   - ./proxy/config/sites-enabled:/etc/nginx/sites-enabled
-   - ./proxy/config/html:/usr/share/nginx/html
-   - ./proxy/config/ssl:/etc/nginx/ssl
+   - ./nginx/config:/config
+   - ./nginx/html:/usr/share/nginx/html
+   - ./nginx/ssl:/etc/nginx/ssl
   ports:
    - "443:443"
    - "8080:8080"

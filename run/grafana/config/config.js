@@ -40,7 +40,7 @@ define(['settings'], function(Settings) {
       datasources: {
         graphite: {
           type: 'graphite',
-          url: "https://" + window.location.hostname + ":8080",
+          url: "https://" + window.location.hostname + "/graphite/",
         },
         elasticsearch: {
           type: 'elasticsearch',
