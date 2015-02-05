@@ -48,7 +48,7 @@ RUN 		apt-get install -y libxml2-dev libxslt-dev gcc git libssl-dev make libldap
 			--add-module=../nginx-auth-ldap && \
 			make && make install && \
 			mkdir /var/lib/nginx/ && \
-			rm -rf /tmp
+			rm -rf /tmp/*
 
 VOLUME 		/config
 VOLUME 		/usr/share/nginx/html
