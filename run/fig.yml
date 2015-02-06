@@ -1,7 +1,7 @@
 elasticsearch:
   image: nuancemobility/elasticsearch
   volumes:
-   - ./elasticsearch/config:/etc/elasticsearch
+   - ./elasticsearch:/etc/elasticsearch
   volumes_from:
    - heramonitoring_elasticsearchdata_1   
 
@@ -12,17 +12,17 @@ graphite:
   ports:
    - "2003:2003"
   volumes:
-   - ./graphite/conf:/etc/carbon
+   - ./graphite:/etc/carbon
 
 grafana:
   image: nuancemobility/grafana
   volumes:
-   - ./grafana/config:/config
+   - ./grafana:/config
 
 kibana:
   image: nuancemobility/kibana
   volumes:
-   - ./kibana/config:/config
+   - ./kibana:/config
 
 logstash:
   image: nuancemobility/logstash
@@ -62,6 +62,7 @@ sensuclient:
   volumes:
    - ./sensu-client/config:/etc/sensu/conf.d
    - ./sensu-client/plugins:/etc/sensu/plugins
+   - ./sensu-client/mib:/etc/sensu/mib
 
 cadvisor:
   image: google/cadvisor

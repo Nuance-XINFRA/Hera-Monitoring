@@ -16,5 +16,6 @@ RUN 		apt-get install -y ruby ruby-dev build-essential git && \
 
 VOLUME 		/etc/sensu/conf.d
 VOLUME 		/etc/sensu/plugins
+VOLUME 		/etc/sensu/mib
 
 COPY 		supervisor 	/etc/supervisor/conf.d

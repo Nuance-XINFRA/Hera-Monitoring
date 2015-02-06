@@ -22,11 +22,12 @@ require 'json'
 
 class SnmpMetricsCollector < Sensu::Plugin::Metric::CLI::Graphite
 
-    PLUGIN_FOLDER = "/etc/sensu/plugins"
-    ENVIRONMENT_FILE = "#{PLUGIN_FOLDER}/environment.json"
-    SNMP_CONF_FILE = "#{PLUGIN_FOLDER}/snmp-conf.json"
+    SENSU_FOLDER = "/etc/sensu"
+    PLUGIN_CONFIG_FOLDER = "#{SENSU_FOLDER}/plugins/collector-config"
+    ENVIRONMENT_FILE = "#{PLUGIN_CONFIG_FOLDER}/environment.json"
+    SNMP_CONF_FILE = "#{PLUGIN_CONFIG_FOLDER}/snmp-conf.json"
 
-    MIB_DIR = PLUGIN_FOLDER
+    MIB_DIR = "#{SENSU_FOLDER}/mib"
 
     option :community,
     :short => '-C snmp community',
