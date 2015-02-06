@@ -1,0 +1,12 @@
+#ldap_server test1 {
+#  url 'ldaps://<host>:636/dc=company,dc=com?sAMAccountName?sub?(objectClass=person)';
+#  require valid_user;
+#  binddn "company\\user";
+#  binddn_passwd "<my_password>";
+#}
+
+#auth_ldap "Please enter your LDAP credentials";
+#auth_ldap_servers test1;
+#auth_ldap_cache_enabled on;
+#auth_ldap_cache_expiration_time 10000;
+#auth_ldap_cache_size 1000;
