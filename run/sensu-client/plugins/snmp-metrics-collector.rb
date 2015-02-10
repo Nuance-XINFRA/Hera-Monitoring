@@ -23,7 +23,7 @@ require 'json'
 class SnmpMetricsCollector < Sensu::Plugin::Metric::CLI::Graphite
 
     SENSU_FOLDER = "/etc/sensu"
-    PLUGIN_CONFIG_FOLDER = "#{SENSU_FOLDER}/plugins/collector-config"
+    PLUGIN_CONFIG_FOLDER = "#{SENSU_FOLDER}/plugins"
     ENVIRONMENT_FILE = "#{PLUGIN_CONFIG_FOLDER}/environment.json"
     SNMP_CONF_FILE = "#{PLUGIN_CONFIG_FOLDER}/snmp-conf.json"
 
