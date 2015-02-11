@@ -5,7 +5,7 @@
       "command": "snmp-metrics-collector.rb -P 7161 -c serviceA",
       "interval": 60,
       "subscribers": [
-        "ncs"
+        "production"
       ],
       "handlers": ["relay"]
     },
@@ -14,9 +14,18 @@
       "command": "snmp-metrics-collector.rb -P 7161 -c serviceB",
       "interval": 60,
       "subscribers": [
-        "ncs"
+        "production"
       ],
       "handlers": ["relay"]
+    },
+    "ServiceA-Graphite-Checks": {
+      "type": "check",
+      "command": "graphite-thresholds-check.rb -c serviceA",
+      "interval": 30,
+      "subscribers": [
+        "production"
+      ],
+      "handlers": ["mailer"]
     }
   }
 }

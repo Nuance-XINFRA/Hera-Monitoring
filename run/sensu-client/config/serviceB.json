@@ -1,0 +1,17 @@
+{
+    "thresholds": {
+        "serviceB": [
+            {
+                "name": "Service B",
+                "target": "environment_name.pod1.serviceB.*.something",
+                "warning": {
+                    "greaterThan": 1000,
+                    "lowerThan": 0
+                },
+                "critical": {
+                    "greaterThan": 2000
+                }
+            }
+        ]
+    }
+}

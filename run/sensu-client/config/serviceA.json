@@ -1,0 +1,17 @@
+{
+    "thresholds": {
+        "serviceA": [
+            {
+                "name": "Service A",
+                "target": "sumSeries(environment_name.pod1.serviceA.*.something)",
+                "warning": {
+                    "greaterThan": 1000,
+                    "lowerThan": 10
+                },
+                "critical": {
+                    "greaterThan": 2000
+                }
+            }
+        ]
+    }
+}
