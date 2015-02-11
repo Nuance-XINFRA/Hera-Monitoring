@@ -17,16 +17,15 @@
 #
 require 'rubygems' if RUBY_VERSION < '1.9.0'
 require 'sensu-plugin/metric/cli'
+require 'sensu-plugin/utils'
 require 'snmp'
 require 'json'
 
 class SnmpMetricsCollector < Sensu::Plugin::Metric::CLI::Graphite
 
-    SENSU_FOLDER = "/etc/sensu"
-    PLUGIN_CONFIG_FOLDER = "#{SENSU_FOLDER}/plugins"
-    ENVIRONMENT_FILE = "#{PLUGIN_CONFIG_FOLDER}/environment.json"
-    SNMP_CONF_FILE = "#{PLUGIN_CONFIG_FOLDER}/snmp-conf.json"
+    include Sensu::Plugin::Utils
 
+    SENSU_FOLDER = "/etc/sensu"
     MIB_DIR = "#{SENSU_FOLDER}/mib"
 
     option :community,
@@ -44,28 +43,14 @@ class SnmpMetricsCollector < Sensu::Plugin::Metric::CLI::Graphite
     :boolean => false
 
     def run
-        environment = parse_environment_file
-        snmp_conf = parse_snmp_conf_file
+        environment = settings['environment']
+        snmp_conf = settings['snmp']
         requested_services = parse_services_argument
         process_collection environment, snmp_conf, requested_services
         ok
     end
 
     private
-
-    def parse_environment_file
-        parse_json_file ENVIRONMENT_FILE
-    end
-
-    def parse_snmp_conf_file
-        parse_json_file SNMP_CONF_FILE
-    end
-
-    def parse_json_file file_path
-        File.open(file_path, "r") do |file|
-            JSON.load(file)
-        end
-    end
 
     def parse_services_argument
         (config[:services] && config[:services].split(',')) || []
