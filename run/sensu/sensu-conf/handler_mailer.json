@@ -1,0 +1,8 @@
+{
+  "handlers": {
+    "mailer": {
+      "type": "pipe",
+      "command": "/etc/sensu/handlers/mailer.rb"
+    }
+  }
+}

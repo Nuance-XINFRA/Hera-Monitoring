@@ -26,6 +26,14 @@ RUN 		apt-get install -y git && \
 			git clone http://github.com/opower/sensu-metrics-relay.git && \
 			cp -R sensu-metrics-relay/lib/sensu/extensions/* /etc/sensu/extensions
 
+# Install Sensu Plugins
+RUN 		apt-get install -y ruby ruby-dev build-essential && \
+			gem install mail --no-ri --no-rdoc -v 2.5.4 && \
+			gem install sensu-plugin --no-ri --no-rdoc && \
+			cd /etc/sensu/handlers && \
+			curl -O https://raw.githubusercontent.com/sensu/sensu-community-plugins/master/handlers/notification/mailer.rb && \
+			chmod +x mailer.rb
+
 VOLUME 		/etc/sensu/conf.d
 VOLUME 		/etc/rabbitmq
 
