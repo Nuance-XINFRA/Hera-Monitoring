@@ -59,6 +59,7 @@ sensuclient:
   image: nuancemobility/sensu-client
   links:
    - sensu
+   - graphite
   volumes:
    - ./sensu-client/config:/etc/sensu/conf.d
    - ./sensu-client/plugins:/etc/sensu/plugins

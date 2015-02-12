@@ -59,6 +59,7 @@ sensuclient:
   build: sensu-client/.
   links:
    - sensu
+   - graphite
   volumes:
    - ../run/sensu-client/config:/etc/sensu/conf.d
    - ../run/sensu-client/plugins:/etc/sensu/plugins
