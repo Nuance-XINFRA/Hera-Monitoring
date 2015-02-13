@@ -7,9 +7,8 @@ RUN 		curl http://repos.sensuapp.org/apt/pubkey.gpg | apt-key add - && \
 			apt-get -y update && apt-get install -y sensu
 
 # Configure Sensu metrics collection
-RUN 		apt-get install -y ruby ruby-dev build-essential git && \
-			gem install sensu-plugin snmp --no-ri --no-rdoc && \
-			apt-get install libsmi2ldbl && \
+RUN 		apt-get install -y ruby zlib1g-dev ruby-dev build-essential git libsmi2ldbl && \
+			gem install sensu-plugin snmp nokogiri nori --no-ri --no-rdoc && \
 			curl -O http://launchpadlibrarian.net/134263381/smitools_0.4.8%2Bdfsg2-7_amd64.deb && \
 			dpkg -i smitools_0.4.8%2Bdfsg2-7_amd64.deb && \
 			rm -f smitools_0.4.8+dfsg2-7_amd64.deb
