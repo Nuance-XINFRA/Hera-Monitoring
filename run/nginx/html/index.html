@@ -9,44 +9,8 @@
 
     <!-- Le styles -->
     <link href="css/bootstrap.css" rel="stylesheet">
-    <style type="text/css">
-      body {
-        padding-top: 20px;
-        padding-bottom: 40px;
-      }
-
-      /* Custom container */
-      .container-narrow {
-        margin: 0 auto;
-        max-width: 1200px;
-      }
-      .container-narrow > hr {
-        margin: 30px 0;
-      }
-
-      /* Main marketing message and sign up button */
-      .jumbotron {
-        margin: 60px 0;
-        text-align: center;
-      }
-      .jumbotron h1 {
-        font-size: 72px;
-        line-height: 1;
-      }
-      .jumbotron .btn {
-        font-size: 21px;
-        padding: 14px 24px;
-      }
-
-      /* Supporting marketing content */
-      .marketing {
-        margin: 60px 0;
-      }
-      .marketing p + h4 {
-        margin-top: 28px;
-      }
-    </style>
     <link href="css/bootstrap-responsive.css" rel="stylesheet">
+    <link href="css/main.css" rel="stylesheet">
 
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
@@ -56,6 +20,11 @@
   </head>
   <body>
     <div class="container-narrow">
+
+      <div id="update-notification" class="alert">
+        <strong>Warning: </strong>A new dashboards version is available!
+        <button type="button" class="btn btn-small btn-warning">Update</button>
+      </div>
 
       <div class="masthead">
         <ul class="nav nav-pills pull-right">
@@ -108,10 +77,6 @@
     </div>
     <script src="https://code.jquery.com/jquery.js"></script>
     <script src="js/bootstrap.min.js"></script>
-    <script>
-      $(document).ready( function() {
-        $("#status-link").attr("href", "https://" + window.location.hostname + ":4242/docker");
-      });
-    </script>
+    <script src="js/main.js"></script>
   </body>
 </html>
