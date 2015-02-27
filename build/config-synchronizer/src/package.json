@@ -1,0 +1,13 @@
+{
+  "name": "monitoring-config-synchronizer",
+  "private": true,
+  "version": "0.0.1",
+  "description": "Synchronize Grafana and Kibana dashboards with a Git repository",
+  "author": "Brice Argenson <brice.argenson@nuance.com>",
+  "dependencies": {
+    "express": "4.12.0",
+    "nodegit": "0.2.7",
+    "nodegit-promise": "1.0.0",
+    "request": "2.53.0"
+  }
+}
