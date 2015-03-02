@@ -2,7 +2,8 @@ FROM 		nuancemobility/ubuntu-base:14.04
 MAINTAINER 	Brice Argenson <brice.argenson@nuance.com>
 
 # Install Graphite Carbon
-RUN 		apt-get install -y graphite-carbon && \
+RUN 		apt-get update -y && \
+            apt-get install -y graphite-carbon && \
 			echo "CARBON_CACHE_ENABLED=true" > /etc/default/graphite-carbon			
 
 # Install Graphite Web

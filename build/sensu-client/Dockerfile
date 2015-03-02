@@ -4,7 +4,8 @@ MAINTAINER 	Brice Argenson <brice.argenson@nuance.com>
 # Install Sensu
 RUN 		curl http://repos.sensuapp.org/apt/pubkey.gpg | apt-key add - && \
 			echo "deb http://repos.sensuapp.org/apt sensu main" > /etc/apt/sources.list.d/sensu.list && \
-			apt-get -y update && apt-get install -y sensu
+			apt-get -y update && \
+            apt-get install -y sensu
 
 # Configure Sensu metrics collection
 RUN 		apt-get install -y ruby zlib1g-dev ruby-dev build-essential git libsmi2ldbl && \
