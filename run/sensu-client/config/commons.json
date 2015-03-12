@@ -1,3 +1,5 @@
 {
-    "graphite_url": "http://graphite"
+  "graphite_url": "https://boot2docker:2003",
+  "fitnesse_url": "https://boot2docker:8888",
+  "screenshoter_url": "https://boot2docker/screenshoter"
 }

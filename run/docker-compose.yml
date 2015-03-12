@@ -88,6 +88,8 @@ monitoringproxy:
    - elasticsearch
    - cadvisor
    - graphite
+   - configsynchronizer
+   - screenshoter
   volumes:
    - ./nginx/config:/config
    - ./nginx/html:/usr/share/nginx/html
@@ -96,6 +98,17 @@ monitoringproxy:
    - "443:443"
    - "8080:8080"
    - "4242:4242"
+
+configsynchronizer:
+  image: nuancemobility/hera-config-synchronizer
+  links:
+   - elasticsearch
+  environment:
+   - ELASTICSEARCH_URL=http://elasticsearch:9200/
+   - GIT_REPOSITORY=https://github.com/Nuance-Mobility/hera-dashboards-example.git
+
+screenshoter:
+  image: nuancemobility/web-screenshoter
 
 rabbitmq:
   image: rabbitmq:3.5
