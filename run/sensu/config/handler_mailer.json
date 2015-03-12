@@ -1,0 +1,8 @@
+{
+  "handlers": {
+    "echo": {
+      "type": "pipe",
+      "command": "uniq"
+    }
+  }
+}

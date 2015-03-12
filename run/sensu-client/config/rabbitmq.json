@@ -1,7 +1,7 @@
 {
   "rabbitmq": {
-    "host": "sensu",
-    "port": 5671,
+    "host": "boot2docker",
+    "port": 5672,
     "vhost": "/",
     "user": "guest",
     "password": "guest"

@@ -40,11 +40,10 @@ sensu:
   image: nuancemobility/sensu
   links:
    - graphite
+   - rabbitmq
   volumes:
-   - ./sensu/sensu-conf:/etc/sensu/conf.d
-   - ./sensu/rabbitmq-conf:/etc/rabbitmq
-  ports:
-   - "5671:5671"
+   - ./sensu/config:/etc/sensu/conf.d
+   - ./sensu/handlers:/etc/sensu/handlers
 
 uchiwa:
   image: uchiwa/uchiwa
@@ -90,3 +89,8 @@ monitoringproxy:
    - "443:443"
    - "8080:8080"
    - "4242:4242"
+
+rabbitmq:
+  image: rabbitmq:3.4.4
+  ports:
+   - "5672:5672"

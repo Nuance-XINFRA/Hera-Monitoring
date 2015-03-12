@@ -1,19 +1,6 @@
 FROM 		nuancemobility/ubuntu-base:14.04
 MAINTAINER 	Brice Argenson <brice.argenson@nuance.com>
 
-# Install RabbitMQ
-RUN 		apt-get update -y && \
-			apt-get -y install erlang-nox && \
-			curl -O http://www.rabbitmq.com/rabbitmq-signing-key-public.asc && \
-			apt-key add rabbitmq-signing-key-public.asc && \
-			echo "deb     http://www.rabbitmq.com/debian/ testing main" > /etc/apt/sources.list.d/rabbitmq.list && \ 
-			apt-get -y update && apt-get install -y rabbitmq-server && \
-			rabbitmq-plugins enable rabbitmq_management --offline && \
-			/etc/init.d/rabbitmq-server start && \
-			rabbitmqctl add_vhost /sensu && \
-			rabbitmqctl add_user sensu mypass && \
-			rabbitmqctl set_permissions -p /sensu sensu ".*" ".*" ".*"
-
 # Install Redis
 RUN 		apt-get install -y redis-server
 
@@ -30,12 +17,9 @@ RUN 		apt-get install -y git && \
 # Install Sensu Plugins
 RUN 		apt-get install -y ruby ruby-dev build-essential && \
 			gem install mail --no-ri --no-rdoc -v 2.5.4 && \
-			gem install sensu-plugin --no-ri --no-rdoc && \
-			cd /etc/sensu/handlers && \
-			curl -O https://raw.githubusercontent.com/sensu/sensu-community-plugins/master/handlers/notification/mailer.rb && \
-			chmod +x mailer.rb
+			gem install sensu-plugin --no-ri --no-rdoc
 
 VOLUME 		/etc/sensu/conf.d
-VOLUME 		/etc/rabbitmq
+VOLUME 		/etc/sensu/handlers
 
 COPY 		supervisor 	/etc/supervisor/conf.d
