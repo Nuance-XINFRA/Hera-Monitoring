@@ -3,12 +3,12 @@ MAINTAINER 	Brice Argenson <brice.argenson@nuance.com>
 
 # Install Graphite Carbon
 RUN 		apt-get update -y && \
-            apt-get install -y graphite-carbon && \
+            	apt-get install -y graphite-carbon && \
 			echo "CARBON_CACHE_ENABLED=true" > /etc/default/graphite-carbon			
 
 # Install Graphite Web
+RUN		apt-get install -y python-pip && pip install django==1.4
 RUN 		apt-get install -y graphite-web apache2 apache2-mpm-worker libapache2-mod-wsgi
-
 # Configure httpd
 RUN 		rm -f /etc/apache2/sites-enabled/000-default.conf && \
 			cp /usr/share/graphite-web/apache2-graphite.conf /etc/apache2/sites-enabled/graphite.conf && \
