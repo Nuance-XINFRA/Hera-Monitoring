@@ -1,0 +1,12 @@
+{
+  "handlers": {
+    "mailer": {
+      "type": "pipe",
+      "command": "/etc/sensu/handlers/mailer.rb"
+    },
+    "dashboards-reporter": {
+      "type": "pipe",
+      "command": "/etc/sensu/handlers/dashboards-reporter.rb"
+    }
+  }
+}

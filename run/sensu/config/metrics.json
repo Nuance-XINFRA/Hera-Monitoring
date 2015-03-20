@@ -26,6 +26,15 @@
         "production"
       ],
       "handlers": ["mailer"]
+    },
+    "Dashboards-Reporter": {
+      "type": "metric",
+      "command": "dashboards-reporter.rb -l https://mt-dmz-bamagent01.nuance.com/grafana/#/dashboard/db/ab-monitoring,https://mt-dmz-bamagent01.nuance.com/kibana/#/dashboard/elasticsearch/Cassandra%20Cluster -w 10000",
+      "interval": 43200,
+      "subscribers": [
+        "ncs"
+      ],
+      "handlers": ["dashboards-reporter"]
     }
   }
 }
