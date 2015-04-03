@@ -99,7 +99,7 @@ module.exports = {
 
       updateKibanaDashboards: function () {
         return new Promise(function (resolve, fail) {
-          var kibanaDashboardsPath = dashboardsPath + "/" + GRAFANA_DASHBOARDS_FOLDER;
+          var kibanaDashboardsPath = dashboardsPath + "/" + KIBANA_DASHBOARDS_FOLDER;
           getDashboardsDefinitions(kibanaDashboardsPath).then(function (dashboardsDefinitions) {
             var results = [];
             dashboardsDefinitions.forEach(function (dashboardDefinition) {
