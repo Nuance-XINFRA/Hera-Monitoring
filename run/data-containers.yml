@@ -1,5 +1,7 @@
 elasticsearchdata:
-  image: nuancemobility/elasticsearch-data
+  image: elasticsearch:1.6
+  command: echo "Starting ElasticSearch Data Container..."
 
 graphitedata:
-  image: nuancemobility/graphite-data
+  image: nuancemobility/graphite
+  command: echo "Starting Graphite Data Container..."

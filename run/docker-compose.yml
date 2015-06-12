@@ -1,9 +1,14 @@
 elasticsearch:
-  image: nuancemobility/elasticsearch
-  volumes:
-   - ./elasticsearch:/etc/elasticsearch
+  image: elasticsearch:1.6
   volumes_from:
    - heramonitoring_elasticsearchdata_1   
+
+elasticsearchcurator:
+  image: nuancemobility/elasticsearch-curator
+  links:
+   - elasticsearch
+  volumes:
+   - ./elasticsearch-curator:/config
 
 graphite:
   image: nuancemobility/graphite
@@ -20,17 +25,18 @@ grafana:
    - ./grafana:/config
 
 kibana:
-  image: nuancemobility/kibana
-  volumes:
-   - ./kibana:/config
+  image: kibana:4.1
+  links:
+   - elasticsearch
 
 logstash:
-  image: nuancemobility/logstash
+  image: logstash:1.5
+  command: logstash -f /config-dir/
   links:
    - elasticsearch
   volumes:
-   - ./logstash/config:/etc/logstash/conf.d
-   - ./logstash/mib:/etc/logstash/mib
+   - ./logstash:/config-dir
+   - ./mib:/mib
    - ./logstash/ssl:/etc/pki/tls
   ports:
    - "5000:5000/udp"
@@ -59,13 +65,14 @@ sensuclient:
   links:
    - sensu
    - graphite
+   - screenshoter
   volumes:
    - ./sensu-client/config:/etc/sensu/conf.d
    - ./sensu-client/plugins:/etc/sensu/plugins
-   - ./sensu-client/mib:/etc/sensu/mib
+   - ./mib:/etc/sensu/mib
 
 cadvisor:
-  image: google/cadvisor
+  image: google/cadvisor:0.15.1
   volumes:
    - /:/rootfs:ro
    - /var/run:/var/run:rw
@@ -91,6 +98,6 @@ monitoringproxy:
    - "4242:4242"
 
 rabbitmq:
-  image: rabbitmq:3.4.4
+  image: rabbitmq:3.5
   ports:
    - "5672:5672"

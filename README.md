@@ -8,14 +8,14 @@
 
 ## Getting Started
 
-In order to build/run the Héra Monitoring stack, you'll need to have Docker and Fig installed on your machine.
-Please look at the [Docker Installation Guide](https://docs.docker.com/installation/) and the [Fig Installation Guide](http://www.fig.sh/install.html) if you don't have them installed.
+In order to build/run the Héra Monitoring stack, you'll need to have Docker and Docker Compose installed on your machine.
+Please look at the [Docker Installation Guide](https://docs.docker.com/installation/) and the [Docker Compose Installation Guide](https://docs.docker.com/compose/install/) if you don't have them installed.
 
 To Run the stack using the images from the official Docker Registry:
 
 	cd ./run
-	fig -p heramonitoring -f data-containers.yml up -d
-	fig -p heramonitoring up -d
+	docker-compose -p heramonitoring -f data-containers.yml up -d
+	docker-compose -p heramonitoring up -d
 
 
 ##Monitoring Data
@@ -30,11 +30,9 @@ Be careful to always use the one you really want to avoid data loss.
 
 You'll find several configuration files in /run/*service_name* folders:
 
-### Elasticsearch
+### Elasticsearch Curator
 
-* *elasticsearch.yml*: This is the Elasticsearch Configuration file. The one we provide just add the support for HTTP Cross Domain requests.
 * *curator.json*: This is a configuration file to configure your data retention in ElasticSearch. The one we provide specify a retention of 14 days for the Logstash data.
-* *logging.yml*: The logging configuration file. The one we provide is the default one provided by ElasticSearch.
 
 ### Grafana
 
@@ -45,14 +43,9 @@ You'll find several configuration files in /run/*service_name* folders:
 * *carbon.conf*: This is the Carbon (the backend use by Graphite) Configuration file. The one we provide should be good for most of the cases but feel free to customize it.
 * *storage-schemas.conf*: Another Carbon Configuration file. This one is useful to configure the retentions of your Graphite data.
 
-### Kibana
-
-* *config.js.*: This is the Kibana configuration file. The one we provide specify the correct host/port for the other services Kibana needs to communicate with.
-
 ### Logstash
 
 * The *config* folder: This is where you have to put your Logstash rules. The ones we provide, include SNMP trap and Lumberjack inputs, filter rules for SNMP traps and Log4j logs and finally, an output definition to Elasticsearch.
-* The *mib* folder: This is where you can place your MIB files for your SNMP traps.
 * The *ssl* folder: This is where you'll find the RSA keys used for Lumberjack communications. Feel free to use yours.
 
 ### Monitoring Proxy (Nginx)
@@ -64,6 +57,9 @@ You'll find several configuration files in /run/*service_name* folders:
 ### Sensu
 
 ### Sensu Client
+
+* The *config* folder: This is where you have your sensu client configuration.
+* The *plugins* folder: This is where you have to put your sensu plugins. Currently, we provide two: one to trigger alarms based on configurable thresholds on Graphite targets and another to collect SNMP metrics on a multi-hosts / multi-services environment.
 
 ### Uchiwa
 

@@ -1,6 +1,7 @@
 {
   "retentions": [
     {
+      "host": "elasticsearch",
       "prefix": "logstash-",
       "days": 14
     }

@@ -2,15 +2,15 @@
 
 import json, subprocess, socket
 
-CONFIGURATION_FILE = "/etc/elasticsearch/curator.json"
+CONFIGURATION_FILE = "/config/curator.json"
 
 def parse_configuration_file():
 	with open(CONFIGURATION_FILE) as f:
 		return json.load(f)
 
 def exec_curator(config):
-	host = socket.gethostname()
 	for retention in config['retentions']:
+		host = retention['host']
 		prefix = retention['prefix']
 		days = retention['days']
 		print "Calling '/usr/local/bin/curator --hosts %s delete --prefix %s --older-than %d'" % (host, prefix, days)
