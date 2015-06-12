@@ -35,7 +35,7 @@ logstash:
   links:
    - elasticsearch
   volumes:
-   - ./logstash:/config-dir
+   - ./logstash/config:/config-dir
    - ./mib:/mib
    - ./logstash/ssl:/etc/pki/tls
   ports:
