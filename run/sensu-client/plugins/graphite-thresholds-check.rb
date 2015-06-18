@@ -11,6 +11,8 @@ require 'sensu-plugin/check/cli'
 require 'sensu-plugin/utils'
 require 'json'
 require 'open-uri'
+require 'openssl'
+require 'cgi'
 
 class CheckGraphiteThresholds < Sensu::Plugin::Check::CLI
 
@@ -105,8 +107,8 @@ class CheckGraphiteThresholds < Sensu::Plugin::Check::CLI
 
     def retrieve_graphite_values target
         begin
-            url = "#{settings['graphite_url']}/render?format=json&target=#{target}&from=-5mins"
-            raw_data = open(url, build_url_opts).gets
+            url = "#{settings['graphite_url']}/render?format=json&target=#{CGI::escape(target)}&from=-5mins"
+            raw_data = open(url, { ssl_verify_mode: OpenSSL::SSL::VERIFY_NONE }).gets
             if raw_data == '[]'
                 unknown 'Empty data received from Graphite - metric probably doesn\'t exists.'
             else
@@ -122,7 +124,7 @@ class CheckGraphiteThresholds < Sensu::Plugin::Check::CLI
                     }
                 }.compact
             end
-        rescue Exception => e
+        rescue OpenURI::HTTPError => e
             unknown 'Failed to connect to graphite server'
         end
     end
