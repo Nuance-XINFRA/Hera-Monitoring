@@ -84,7 +84,7 @@ class DashboardReporter < Sensu::Handler
   end
 
   def build_mail_to_list json_config
-    mail_to = @event['client']['mail_to'] || json_config['mail_to']
+    mail_to = @event['client']['mail_to'] || json_config['report_to']
     if json_config.key?('subscriptions')
       @event['check']['subscribers'].each do |sub|
         if json_config['subscriptions'].key?(sub)
