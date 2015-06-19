@@ -2,6 +2,6 @@ elasticsearchdata:
   image: elasticsearch:1.6
   command: echo "Starting ElasticSearch Data Container..."
 
-graphitedata:
-  image: nuancemobility/graphite
-  command: echo "Starting Graphite Data Container..."
+whisper:
+  image: nuancemobility/carbon
+  command: whisper

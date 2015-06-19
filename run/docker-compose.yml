@@ -1,3 +1,23 @@
+carboncache:
+  image: nuancemobility/carbon
+  command: cache
+  ports:
+   - "2003:2003"
+   - "2004:2004"
+  volumes:
+   - ./carbon:/etc/carbon
+  volumes_from:
+   - heramonitoring_whisper_1
+
+graphite:
+  image: nuancemobility/graphite-web
+  volumes:
+   - ./graphite-web:/etc/graphite
+  volumes_from:
+   - heramonitoring_whisper_1
+  links:
+   - carboncache
+
 elasticsearch:
   image: elasticsearch:1.6
   volumes_from:
@@ -9,15 +29,6 @@ elasticsearchcurator:
    - elasticsearch
   volumes:
    - ./elasticsearch-curator:/config
-
-graphite:
-  image: nuancemobility/graphite
-  volumes_from:
-   - heramonitoring_graphitedata_1
-  ports:
-   - "2003:2003"
-  volumes:
-   - ./graphite:/etc/carbon
 
 grafana:
   image: nuancemobility/grafana
@@ -45,7 +56,7 @@ logstash:
 sensu:
   image: nuancemobility/sensu
   links:
-   - graphite
+   - carboncache
    - rabbitmq
   volumes:
    - ./sensu/config:/etc/sensu/conf.d
