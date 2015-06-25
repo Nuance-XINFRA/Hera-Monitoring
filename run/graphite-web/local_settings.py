@@ -171,25 +171,8 @@ DATABASES = {
 # metric data. Note that the first server to return a match for a query will be
 # used.
 #CLUSTER_SERVERS = ["10.0.2.2:80", "10.0.2.3:80"]
-# mtl-blade31-12----10.3.65.10   & mtl-blade19-02----10.3.45.244
 #CLUSTER_SERVERS = ["10.3.65.10:80", "10.3.45.244:80"]
 #
-#ping mtl-babardn01a.nuance.com 10.3.45.139
-#ping mtl-babardn01b.nuance.com 10.3.45.140
-#ping mtl-babardn01c.nuance.com 10.3.45.141
-#ping mtl-babardn01d.nuance.com 10.3.45.142
-#ping mtl-babardn02a.nuance.com 10.3.45.143
-#ping mtl-babardn02b.nuance.com 10.3.45.144
-#ping mtl-babardn02c.nuance.com 10.3.45.145
-#ping mtl-babardn02d.nuance.com 10.3.45.146
-#ping mtl-babardn03a.nuance.com 10.3.45.147
-#ping mtl-babardn03b.nuance.com 10.3.45.148
-#ping mtl-babardn03c.nuance.com 10.3.45.149
-#ping mtl-babardn03d.nuance.com 10.3.45.150
-#ping mtl-babardn04a.nuance.com 10.3.45.151
-#ping mtl-babardn04b.nuance.com 10.3.45.152
-#ping mtl-babardn04c.nuance.com 10.3.45.153
-#ping mtl-babardn04d.nuance.com 10.3.45.154 <- this is not used (reserved for monitoring
 #CLUSTER_SERVERS = ["10.3.45.139:80", "10.3.45.140:80", "10.3.45.141:80", "10.3.45.142:80", "10.3.45.143:80", "10.3.45.144:80", "10.3.45.145:80", "10.3.45.146:80", "10.3.45.147:80", "10.3.45.148:80", "10.3.45.149:80", "10.3.45.150:80", "10.3.45.150:80", "10.3.45.150:80", "10.3.45.150:80"]
 
 
@@ -216,27 +199,10 @@ DATABASES = {
 # You *should* use 127.0.0.1 here in most cases
 #CARBONLINK_HOSTS = ["127.0.0.1:7002:a", "127.0.0.1:7102:b", "127.0.0.1:7202:c"]
 #CARBONLINK_TIMEOUT = 1.0
-# mtl-blade31-12----10.3.65.10   & mtl-blade19-02----10.3.45.244
 #
 #CARBONLINK_HOSTS = ["10.3.65.10:7002", "10.3.45.244:7002"]
 #CARBONLINK_TIMEOUT = 1.0
 #
-#ping mtl-babardn01a.nuance.com 10.3.45.139
-#ping mtl-babardn01b.nuance.com 10.3.45.140
-#ping mtl-babardn01c.nuance.com 10.3.45.141
-#ping mtl-babardn01d.nuance.com 10.3.45.142
-#ping mtl-babardn02a.nuance.com 10.3.45.143
-#ping mtl-babardn02b.nuance.com 10.3.45.144
-#ping mtl-babardn02c.nuance.com 10.3.45.145
-#ping mtl-babardn02d.nuance.com 10.3.45.146
-#ping mtl-babardn03a.nuance.com 10.3.45.147
-#ping mtl-babardn03b.nuance.com 10.3.45.148
-#ping mtl-babardn03c.nuance.com 10.3.45.149
-#ping mtl-babardn03d.nuance.com 10.3.45.150
-#ping mtl-babardn04a.nuance.com 10.3.45.151
-#ping mtl-babardn04b.nuance.com 10.3.45.152
-#ping mtl-babardn04c.nuance.com 10.3.45.153
-#ping mtl-babardn04d.nuance.com 10.3.45.154 <- this is not used (reserved for monitoring
 CARBONLINK_HOSTS = ["carboncache:7002"]
 CARBONLINK_TIMEOUT = 1.0
 
