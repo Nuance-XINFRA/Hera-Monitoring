@@ -42,7 +42,9 @@ kibana:
 
 logstash:
   image: logstash:1.5
-  command: logstash -f /config-dir/
+  command: -f /config-dir/
+  environment:
+   - LS_MAX_MEM=2048m
   links:
    - elasticsearch
   volumes:
