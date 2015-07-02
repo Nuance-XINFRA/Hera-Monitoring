@@ -35,7 +35,12 @@ grafana:
   volumes:
    - ./grafana:/config
 
-kibana:
+kibana3:
+  image: nuancemobility/kibana
+  volumes:
+   - ./kibana:/config
+
+kibana4:
   image: kibana:4.1
   links:
    - elasticsearch
@@ -97,7 +102,8 @@ monitoringproxy:
   links:
    - uchiwa
    - grafana
-   - kibana
+   - kibana3
+   - kibana4
    - elasticsearch
    - cadvisor
    - graphite
