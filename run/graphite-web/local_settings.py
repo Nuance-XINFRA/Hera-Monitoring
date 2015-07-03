@@ -203,7 +203,7 @@ DATABASES = {
 #CARBONLINK_HOSTS = ["10.3.65.10:7002", "10.3.45.244:7002"]
 #CARBONLINK_TIMEOUT = 1.0
 #
-CARBONLINK_HOSTS = ["carboncache:7002"]
+CARBONLINK_HOSTS = ["carboncache1:7002", "carboncache2:7002"]
 CARBONLINK_TIMEOUT = 1.0
 
 #####################################

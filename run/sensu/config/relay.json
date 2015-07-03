@@ -1,7 +1,7 @@
 {
   "relay": {
     "graphite": {
-      "host": "carboncache",
+      "host": "carbonrelay",
       "port": 2003
     }
   }

@@ -1,11 +1,28 @@
-carboncache:
+carbonrelay:
   image: nuancemobility/carbon
-  command: cache
+  command: relay
   ports:
    - "2003:2003"
    - "2004:2004"
   volumes:
-   - ./carbon:/etc/carbon
+   - ./carbon/relay:/etc/carbon
+  links:
+   - carboncache1
+   - carboncache2
+
+carboncache1:
+  image: nuancemobility/carbon
+  command: cache
+  volumes:
+   - ./carbon/cache:/etc/carbon
+  volumes_from:
+   - heramonitoring_whisper_1
+
+carboncache2:
+  image: nuancemobility/carbon
+  command: cache
+  volumes:
+   - ./carbon/cache:/etc/carbon
   volumes_from:
    - heramonitoring_whisper_1
 
@@ -16,7 +33,8 @@ graphite:
   volumes_from:
    - heramonitoring_whisper_1
   links:
-   - carboncache
+   - carboncache1
+   - carboncache2
 
 elasticsearch:
   image: elasticsearch:1.6
@@ -49,7 +67,7 @@ logstash:
   image: logstash:1.5
   command: -f /config-dir/
   environment:
-   - LS_MAX_MEM=2048m
+   - LS_HEAP_SIZE=2048m
   links:
    - elasticsearch
   volumes:
@@ -63,7 +81,7 @@ logstash:
 sensu:
   image: nuancemobility/sensu
   links:
-   - carboncache
+   - carbonrelay
    - rabbitmq
   volumes:
    - ./sensu/config:/etc/sensu/conf.d
