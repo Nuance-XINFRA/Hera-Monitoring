@@ -128,7 +128,8 @@ monitoringproxy:
    - configsynchronizer
    - screenshoter
   volumes:
-   - ./nginx/config:/config
+   - ./nginx/config/nginx.conf:/etc/nginx/nginx.conf
+   - ./nginx/config/includes:/etc/nginx/includes
    - ./nginx/html:/usr/share/nginx/html
    - ./nginx/ssl:/etc/nginx/ssl
   ports:

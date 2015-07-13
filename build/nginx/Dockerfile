@@ -51,10 +51,11 @@ RUN 		apt-get update -y && \
 			mkdir /var/lib/nginx/ && \
 			rm -rf /tmp/*
 
-VOLUME 		/config
+COPY        docker-entrypoint.sh /
+
 VOLUME 		/usr/share/nginx/html
 VOLUME 		/etc/nginx/ssl			
 
 EXPOSE 		80
 
-COPY 		supervisor 	/etc/supervisor/conf.d
+ENTRYPOINT  ["/docker-entrypoint.sh"]
