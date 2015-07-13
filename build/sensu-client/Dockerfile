@@ -14,8 +14,12 @@ RUN 		apt-get install -y ruby zlib1g-dev ruby-dev build-essential git libsmi2ldb
 			dpkg -i smitools_0.4.8%2Bdfsg2-7_amd64.deb && \
 			rm -f smitools_0.4.8+dfsg2-7_amd64.deb
 
+COPY        docker-entrypoint.sh /
+
 VOLUME 		/etc/sensu/conf.d
 VOLUME 		/etc/sensu/plugins
 VOLUME 		/etc/sensu/mib
 
-COPY 		supervisor 	/etc/supervisor/conf.d
+ENTRYPOINT  ["/docker-entrypoint.sh"]
+
+CMD         ["start"]
