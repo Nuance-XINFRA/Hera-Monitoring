@@ -1,6 +1,6 @@
 {
   "rabbitmq": {
-    "host": "boot2docker",
+    "host": "localhost",
     "port": 5672,
     "vhost": "/",
     "user": "guest",

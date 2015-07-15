@@ -39,7 +39,7 @@ graphite:
 elasticsearch:
   image: elasticsearch:1.6
   volumes_from:
-   - heramonitoring_elasticsearchdata_1   
+   - heramonitoring_elasticsearchdata_1
 
 elasticsearchcurator:
   image: nuancemobility/elasticsearch-curator
@@ -106,6 +106,8 @@ sensuclient:
    - ./sensu-client/config:/etc/sensu/conf.d
    - ./sensu-client/plugins:/etc/sensu/plugins
    - ./mib:/etc/sensu/mib
+  net: host
+  privileged: true
 
 cadvisor:
   image: google/cadvisor:0.15.1
