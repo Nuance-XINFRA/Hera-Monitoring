@@ -38,6 +38,9 @@ graphite:
 
 elasticsearch:
   image: elasticsearch:1.6
+  command: -Des.node.name="hera_elasticsearch_001" -Des.bootstrap.mlockall=true
+  environment:
+   - ES_HEAP_SIZE=2g
   volumes_from:
    - heramonitoring_elasticsearchdata_1
 

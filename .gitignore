@@ -1,2 +1,7 @@
 .DS_Store
 
+run/hera/logstash/ssl/certs/logstash-forwarder.crt
+run/hera/logstash/ssl/private/logstash-forwarder.key
+run/hera/nginx/includes/ldap
+run/hera/nginx/ssl/certs/nginx.crt
+run/hera/nginx/ssl/private/nginx.key
