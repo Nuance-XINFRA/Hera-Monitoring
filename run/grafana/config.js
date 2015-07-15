@@ -36,20 +36,20 @@ define(['settings'], function(Settings) {
       */
 
       // Graphite & Elasticsearch example setup
-      
+
       datasources: {
         graphite: {
           type: 'graphite',
-          url: "https://" + window.location.hostname + "/graphite/",
+          url: "https://" + window.location.hostname + "/graphite/"
         },
         elasticsearch: {
           type: 'elasticsearch',
           url: "https://" + window.location.hostname + "/elasticsearch/",
           index: 'grafana-dash',
-          grafanaDB: true,
+          grafanaDB: true
         }
       },
-      
+
 
       // OpenTSDB & Elasticsearch example setup
       /*
