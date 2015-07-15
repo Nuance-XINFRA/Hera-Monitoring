@@ -51,7 +51,7 @@ elasticsearchcurator:
 grafana:
   image: nuancemobility/grafana
   volumes:
-   - ./grafana:/config
+   - ./grafana/config.js:/usr/share/grafana/config.js
 
 kibana3:
   image: nuancemobility/kibana
