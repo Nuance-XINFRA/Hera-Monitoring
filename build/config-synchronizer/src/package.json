@@ -6,8 +6,8 @@
   "author": "Brice Argenson <brice.argenson@nuance.com>",
   "dependencies": {
     "express": "4.12.0",
-    "nodegit": "0.2.7",
-    "nodegit-promise": "1.0.0",
+    "nodegit": "0.4.1",
+    "nodegit-promise": "2.0.1",
     "request": "2.53.0"
   }
 }

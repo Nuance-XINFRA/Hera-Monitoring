@@ -12,7 +12,7 @@ var Cred = NodeGit.Cred;
 var DEFAULT_REMOTE_NAME = "origin";
 
 
-module.exports = function (localPath, remotePath) {
+module.exports = function (localPath, remotePath, remoteUser, remotePass) {
 
   var repository;
 
@@ -90,7 +90,21 @@ module.exports = function (localPath, remotePath) {
       return new Promise(function (resolve, fail) {
         removeFolderIfExists(localPath).then(function () {
           console.log("Cloning remote repository...");
-          return Clone.clone(remotePath, localPath);
+          var opts = {
+            remoteCallbacks: {
+              certificateCheck: function() {
+                return 1;
+              },
+              credentials: function() {
+                if (remoteUser && remotePass) {
+                  return NodeGit.Cred.userpassPlaintextNew(remoteUser,remotePass);
+                } else {
+                  return NodeGit.Cred.defaultNew();
+                }
+              }
+            }
+          };
+          return Clone.clone(remotePath, localPath, opts);
         }).then(function (repo) {
           repository = repo;
           console.log("Repository cloned.");
