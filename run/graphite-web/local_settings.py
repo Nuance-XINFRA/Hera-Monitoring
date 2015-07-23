@@ -170,10 +170,7 @@ DATABASES = {
 # remote server in the cluster. These servers must each have local access to
 # metric data. Note that the first server to return a match for a query will be
 # used.
-#CLUSTER_SERVERS = ["10.0.2.2:80", "10.0.2.3:80"]
-#CLUSTER_SERVERS = ["10.3.65.10:80", "10.3.45.244:80"]
-#
-#CLUSTER_SERVERS = ["10.3.45.139:80", "10.3.45.140:80", "10.3.45.141:80", "10.3.45.142:80", "10.3.45.143:80", "10.3.45.144:80", "10.3.45.145:80", "10.3.45.146:80", "10.3.45.147:80", "10.3.45.148:80", "10.3.45.149:80", "10.3.45.150:80", "10.3.45.150:80", "10.3.45.150:80", "10.3.45.150:80"]
+CLUSTER_SERVERS = ["carboncache1", "carboncache2"]
 
 
 ## These are timeout values (in seconds) for requests to remote webapps
@@ -212,4 +209,3 @@ CARBONLINK_TIMEOUT = 1.0
 # Uncomment the following line for direct access to Django settings such as
 # MIDDLEWARE_CLASSES or APPS
 #from graphite.app_settings import *
-
