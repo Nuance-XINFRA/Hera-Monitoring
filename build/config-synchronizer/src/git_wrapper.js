@@ -67,7 +67,11 @@ module.exports = function (localPath, remotePath, remoteUser, remotePass) {
           console.log("Pulling the remote repository...");
           return repository.fetchAll({
             credentials: function () {
-              return Cred.defaultNew();
+              if (remoteUser && remotePass) {
+                return NodeGit.Cred.userpassPlaintextNew(remoteUser,remotePass);
+              } else {
+                return NodeGit.Cred.defaultNew();
+              }
             },
             certificateCheck: function () {
               return 1;
