@@ -170,7 +170,7 @@ DATABASES = {
 # remote server in the cluster. These servers must each have local access to
 # metric data. Note that the first server to return a match for a query will be
 # used.
-CLUSTER_SERVERS = ["carboncache1", "carboncache2"]
+CLUSTER_SERVERS = []
 
 
 ## These are timeout values (in seconds) for requests to remote webapps
@@ -194,12 +194,6 @@ CLUSTER_SERVERS = ["carboncache1", "carboncache2"]
 # and a common scheme is to use 7102 for instance b, 7202 for instance c, etc.
 #
 # You *should* use 127.0.0.1 here in most cases
-#CARBONLINK_HOSTS = ["127.0.0.1:7002:a", "127.0.0.1:7102:b", "127.0.0.1:7202:c"]
-#CARBONLINK_TIMEOUT = 1.0
-#
-#CARBONLINK_HOSTS = ["10.3.65.10:7002", "10.3.45.244:7002"]
-#CARBONLINK_TIMEOUT = 1.0
-#
 CARBONLINK_HOSTS = ["carboncache1:7002", "carboncache2:7002"]
 CARBONLINK_TIMEOUT = 1.0
 
