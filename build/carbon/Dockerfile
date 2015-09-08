@@ -9,6 +9,7 @@ VOLUME      /etc/carbon
 VOLUME      /var/lib/graphite/whisper
 
 COPY        docker-entrypoint.sh /
+COPY        carbon_cache_relay_init_script.sh /
 
 ENTRYPOINT  ["/docker-entrypoint.sh"]
 

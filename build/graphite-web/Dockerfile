@@ -18,6 +18,7 @@ RUN 		    rm -f /etc/apache2/sites-enabled/000-default.conf && \
             a2enmod headers
 
 COPY        docker-entrypoint.sh /
+COPY		graphite_web_init_script.sh /
 
 VOLUME      /var/lib/graphite/whisper
 EXPOSE 		  80
