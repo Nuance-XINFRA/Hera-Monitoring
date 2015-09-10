@@ -38,8 +38,8 @@ function replaceGrafanaElasticSearchUrlSettings ( )
 		else
 			# TODO add further checking in future
 			# substitute values in config.js
-			#TODO# sed -i "/\/elasticsearch\//c\url: ${HERA_GRAFANA_LOCAL_ELASTICSEARCH_URL}" /usr/share/grafana/config.js
-			sed -i "/\/elasticsearch\//c\url: ${HERA_GRAFANA_LOCAL_ELASTICSEARCH_URL}," grafana/config.js
+			sed -i "/\/elasticsearch\//c\url: ${HERA_GRAFANA_LOCAL_ELASTICSEARCH_URL}," /usr/share/grafana/config.js
+			#TODO-test# sed -i "/\/elasticsearch\//c\url: ${HERA_GRAFANA_LOCAL_ELASTICSEARCH_URL}," grafana/config.js
 		fi
 	fi	
 }
@@ -67,8 +67,8 @@ function replaceGrafanaGraphiteUrlSettings ( )
 		else
 			# TODO add further checking in future
 			# substitute values in config.js
-			#TODO# sed -i "/\/graphite\//c\url: ${HERA_GRAFANA_LOCAL_GRAPHITE_URL}," /usr/share/grafana/config.js
-			sed -i "/\/graphite\//c\url: ${HERA_GRAFANA_LOCAL_GRAPHITE_URL}," grafana/config.js
+			sed -i "/\/graphite\//c\url: ${HERA_GRAFANA_LOCAL_GRAPHITE_URL}," /usr/share/grafana/config.js
+			#TODO-test# sed -i "/\/graphite\//c\url: ${HERA_GRAFANA_LOCAL_GRAPHITE_URL}," grafana/config.js
 		fi
 	fi	
 }
