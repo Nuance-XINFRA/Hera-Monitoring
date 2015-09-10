@@ -13,6 +13,7 @@ RUN					apt-get update -y && \
 						echo "\nDocumentRoot /usr/share/grafana\n" >> /etc/apache2/apache2.conf
 
 COPY        docker-entrypoint.sh /
+COPY        grafana_init_script.sh /
 
 EXPOSE			80
 
