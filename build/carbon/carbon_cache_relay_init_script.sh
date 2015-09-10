@@ -144,7 +144,7 @@ function replaceCarbonRelayDestinationsWithEnvVar ( )
 # NOTE: in your docker-compose, make sure HERA_CARBON_RELAY_DESTINATIONS is set to either
 #	 case1: for hera-top-nodes, the value should be the address:port of the OTHER relays instances running on the hera-collector-nodes (on port 2004, 2104, 2014 or 2114...etc)
 #	        ie, in case of 3 hera collector nodes [10.3.4.5, 10.3.4.6 & 10.3.4.7] each running 2 instances of a carbonrelay on exposed ports 2004 and 2104, use:
-#	        HERA_CARBON_RELAY_DESTINATIONS="10.3.4.5:2004, 10.3.4.6:2004, 10.3.4.7:2004, 10.3.4.5:2104, 10.3.4.6:2104, 10.3.4.7:2104"
+#	        HERA_CARBON_RELAY_DESTINATIONS="10.3.4.5:2004:x, 10.3.4.6:2004:x, 10.3.4.7:2004:x, 10.3.4.5:2014:y, 10.3.4.6:2014:y, 10.3.4.7:2014:y"
 #	 case2: for hera-collector-nodes, the value should be "AUTOLINK" so that the carboncaches linked localy are used to directly.
 #	        ie, HERA_CARBON_RELAY_DESTINATIONS=AUTOLINK
 #######################################################

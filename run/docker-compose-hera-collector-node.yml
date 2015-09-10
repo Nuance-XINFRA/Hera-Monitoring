@@ -308,137 +308,23 @@ graphite2:
 elasticsearch:
   image: elasticsearch:1.6
   command: -Des.node.name="hera_elasticsearch_001" -Des.bootstrap.mlockall=true
+  ports:
+   - "9200:9200"
+   - "9300:9300"
   environment:
    - ES_HEAP_SIZE=1024m
   volumes_from:
    - ncsmonitoring_elasticsearchdata_1
 
-elasticsearchcurator:
-  image: nuancemobility/elasticsearch-curator
-  links:
-   - elasticsearch
-  volumes:
-   - ./elasticsearch-curator:/config
-
 grafana:
   image: nuancemobility/grafana
+  ports:
+   - "8080:80"
+  environment:
+   - HERA_GRAFANA_LOCAL_ELASTICSEARCH_URL
+   - HERA_GRAFANA_LOCAL_GRAPHITE_URL
+   - HERA_GRAFANA_INIT_SCRIPT_LOG_VERBOSE
   volumes:
    - ./grafana/config.js:/usr/share/grafana/config.js
-
-kibana3:
-  image: nuancemobility/kibana
-  volumes:
-   - ./kibana:/config
-
-kibana4:
-  image: kibana:4.1
   links:
    - elasticsearch
-
-logstash:
-  image: logstash:1.5
-  command: -f /config-dir/
-  environment:
-   - LS_HEAP_SIZE=2048m
-  links:
-   - elasticsearch
-   - redis
-  volumes:
-   - ./logstash:/config-dir
-   - ./mib:/mib
-   - /etc/hera/logstash/ssl:/etc/pki/tls
-  ports:
-   - "5000:5000/udp"
-   - "5001:5001"
-
-redis:
-    image: redis:3.0.2
-    ports:
-        - "6379:6379"
-
-sensu:
-  image: nuancemobility/sensu
-  links:
-   - carbonrelay1
-   - rabbitmq
-  volumes:
-   - ./sensu/config:/etc/sensu/conf.d
-   - ./sensu/handlers:/etc/sensu/handlers
-
-uchiwa:
-  image: uchiwa/uchiwa
-  links:
-   - sensu
-  volumes:
-   - ./uchiwa:/config
-  ports:
-   - "3000:3000"
-
-sensuclient:
-  image: nuancemobility/sensu-client
-  volumes:
-   - ./sensu-client/config:/etc/sensu/conf.d
-   - ./sensu-client/plugins:/etc/sensu/plugins
-   - ./mib:/etc/sensu/mib
-   - /var/run:/var/run:rw
-#   - /sys:/sys:ro
-#   - /proc:/proc:ro
-  net: "host"
-  privileged: true
-
-cadvisor:
-  image: google/cadvisor:0.15.1
-  volumes:
-   - /:/rootfs:ro
-   - /var/run:/var/run:rw
-#   - /sys:/sys:ro
-   - /var/lib/docker/:/var/lib/docker:ro
-
-monitoringproxy:
-  image: nuancemobility/nginx
-  links:
-   - uchiwa
-   - grafana
-   - kibana3
-   - kibana4
-   - elasticsearch
-   - cadvisor
-   - graphite1
-   - graphite2
-#   - fitnesse
-   - configsynchronizer
-   - screenshoter
-  volumes:
-   - ./nginx/config/nginx.conf:/etc/nginx/nginx.conf
-   - ./nginx/html:/usr/share/nginx/html
-   - /etc/hera/nginx/ssl:/etc/nginx/ssl
-   - /etc/hera/nginx/includes:/etc/nginx/includes
-  ports:
-   - "443:443"
-   - "8080:8080"
-   - "8888:8888"
-   - "4242:4242"
-
-configsynchronizer:
-  image: nuancemobility/hera-config-synchronizer
-  links:
-   - elasticsearch
-  environment:
-   - ELASTICSEARCH_URL=http://elasticsearch:9200/
-   - GIT_REPOSITORY=https://git.labs.nuance.com/ncs-devops/ncs-monitoring-config.git
-
-#fitnesse:
-#  image: mtl-mobi-registry:5000/nmt_fitnesse:6.0.100.16.6
-#  environment:
-#   - CS_GWPORT=8911
-#   - CS_APPKEY=525348e77144a9cee9a7471a8b67c50ea85b9e3eb377a3c1a3a23db88f9150eefe76e6a339fdbc62b817595f53d72549d9ebe36438f8c2619846b963e9f43a93
-#   - CS_NMAID=SAMPLE_DEBUG_NMAID_TO_BE_REPLACED
-#   - CS_GWHOST=mtl-blade19-06.nuance.com
-
-screenshoter:
-  image: nuancemobility/web-screenshoter
-
-rabbitmq:
-  image: rabbitmq:3.5
-  ports:
-   - "5672:5672"
