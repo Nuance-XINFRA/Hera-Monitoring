@@ -240,8 +240,8 @@ grafana:
   ports:
    - "8080:80"
   environment:
-   - HERA_GRAFANA_LOCAL_ELASTICSEARCH_URL
-   - HERA_GRAFANA_LOCAL_GRAPHITE_URL
+   - HERA_GRAFANA_LOCAL_ELASTICSEARCH_PORT
+   - HERA_GRAFANA_LOCAL_GRAPHITE_PORT
    - HERA_GRAFANA_INIT_SCRIPT_LOG_VERBOSE
   volumes:
    - ./grafana/config.js:/usr/share/grafana/config.js
