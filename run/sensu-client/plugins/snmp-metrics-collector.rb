@@ -110,7 +110,7 @@ class SnmpMetricsCollector < Sensu::Plugin::Metric::CLI::Graphite
                     unless walk_success
                         puts "Nothing returned with a SNMP walk. Trying a SNMP get..."
                         manager.get([oid]).each_varbind do |vb|
-                            unless vb.value.to_s == 'noSuchInstance'
+                            if vb.value.to_s != 'noSuchObject' && vb.value.to_s != 'noSuchInstance'
                                 print_graphite_entry vb, mib_modules, prefix, snmp_service_conf['type'], device
                             else
                                 puts "SNMP request failed. Impossible to retrieve #{oid}."
