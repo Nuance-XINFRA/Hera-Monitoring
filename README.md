@@ -37,11 +37,19 @@ You'll find several configuration files in /run/*service_name* folders:
 ### Grafana
 
 * *config.js*: This is the Grafana configuration file. The one we provide specify the correct host/port for the other services Grafana needs to communicate with.
+* Refer to the [grafana](https://github.com/Nuance-Mobility/Hera-Monitoring/tree/master/build/grafana) image in build folder for details on available custom configurations controllable at container startup time. 
 
-### Graphite
+### Graphite-Web
 
-* *carbon.conf*: This is the Carbon (the backend use by Graphite) Configuration file. The one we provide should be good for most of the cases but feel free to customize it.
-* *storage-schemas.conf*: Another Carbon Configuration file. This one is useful to configure the retentions of your Graphite data.
+* *local_settings.py*: This is the graphite-web configuration file. The one we provide should be good for most of the cases but feel free to customize it. 
+* Refer to the [graphite-web](https://github.com/Nuance-Mobility/Hera-Monitoring/tree/master/build/graphite-web) image in build folder for details on available custom configurations controllable at container startup time. 
+
+### Carbon
+
+* *cache/carbon.conf*: This is the Carbon-Cache (the backend use by Graphite to store data in Whisper files) Configuration file. The one we provide should be good for most of the cases but feel free to customize it.
+* *cache/storage-schemas.conf*: Another Carbon Configuration file. This one is useful to configure the retentions of your Graphite data.
+* *relay/carbon.conf*: This is the Carbon-Relay (the backend use by Graphite to distribute data writing across multiple Carbon-Cache) Configuration file. The one we provide should be good for most of the cases but feel free to customize it.
+* Refer to the [carbon](https://github.com/Nuance-Mobility/Hera-Monitoring/tree/master/build/carbon) image in build folder for details on available custom configurations controllable at container startup time. 
 
 ### Logstash
 

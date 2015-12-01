@@ -48,7 +48,7 @@ function replaceGraphiteWebApache2PerfSettingsThreadsAndProcesses ( )
 					logInfo "WARNING: \$HERA_GRAPHITE_WEB_APACHE2_PROCESSES_NO_WHITE_SPACES env varialble is set to empty, this should have been set to a valid number (5) in the docker-compose.yml. nothing to do here!"
 				else					
 					# substitute values
-					sed -i "/WSGIDaemonProcess _graphite processes=/c\WSGIDaemonProcess _graphite processes=${HERA_GRAPHITE_WEB_APACHE2_PROCESSES} threads=${HERA_GRAPHITE_WEB_APACHE2_THREADS} display-name='%{GROUP}' inactivity-timeout=120 user=_graphite group=_graphite" /etc/graphite/apache2/sites-enabled/graphite.conf
+					sed -i "/WSGIDaemonProcess _graphite processes=/c\WSGIDaemonProcess _graphite processes=${HERA_GRAPHITE_WEB_APACHE2_PROCESSES} threads=${HERA_GRAPHITE_WEB_APACHE2_THREADS} display-name='%{GROUP}' inactivity-timeout=120 user=_graphite group=_graphite" /etc/apache2/sites-enabled/graphite.conf
 					#TODO-test# sed -i "/WSGIDaemonProcess _graphite processes=/c\	WSGIDaemonProcess _graphite processes=${HERA_GRAPHITE_WEB_APACHE2_PROCESSES} threads=${HERA_GRAPHITE_WEB_APACHE2_THREADS} display-name='%{GROUP}' inactivity-timeout=120 user=_graphite group=_graphite" etc_graphite_web/apache2/sites-enabled/graphite.conf	
 				fi							
 			fi				
@@ -89,9 +89,9 @@ function replaceGraphiteWebApache2PerfSettingsWorkerAndServerLimits ( )
 					logInfo "WARNING: \$HERA_GRAPHITE_WEB_APACHE2_SERVER_LIMIT_NO_WHITE_SPACES env varialble is set to empty, this should have been set to a valid number (128) in the docker-compose.yml. nothing to do here!"
 				else					
 					# substitute values
-					echo "MaxRequestWorkers ${HERA_GRAPHITE_WEB_APACHE2_MAX_REQUEST_WORKER}" >> /etc/graphite/apache2/apache2.conf
+					echo "MaxRequestWorkers ${HERA_GRAPHITE_WEB_APACHE2_MAX_REQUEST_WORKER}" >> /etc/apache2/apache2.conf
 					#TODO-test# echo "MaxRequestWorkers ${HERA_GRAPHITE_WEB_APACHE2_MAX_REQUEST_WORKER}" >> etc_graphite_web/apache2/apache2.conf
-					echo "ServerLimit ${HERA_GRAPHITE_WEB_APACHE2_SERVER_LIMIT}" >> /etc/graphite/apache2/apache2.conf
+					echo "ServerLimit ${HERA_GRAPHITE_WEB_APACHE2_SERVER_LIMIT}" >> /etc/apache2/apache2.conf
 					#TODO-test# echo "ServerLimit ${HERA_GRAPHITE_WEB_APACHE2_SERVER_LIMIT}" >> etc_graphite_web/apache2/apache2.conf
 				fi							
 			fi				

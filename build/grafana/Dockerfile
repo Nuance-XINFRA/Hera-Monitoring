@@ -12,6 +12,13 @@ RUN					apt-get update -y && \
 						rm -f /etc/apache2/sites-enabled/000-default.conf && \
 						echo "\nDocumentRoot /usr/share/grafana\n" >> /etc/apache2/apache2.conf
 
+						
+# Enable apache2 modes
+RUN					a2enmod headers
+RUN					a2enmod rewrite
+RUN					a2enmod proxy
+RUN					a2enmod proxy_http
+
 COPY        docker-entrypoint.sh /
 COPY        grafana_init_script.sh /
 
