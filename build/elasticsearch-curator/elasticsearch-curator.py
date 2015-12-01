@@ -13,9 +13,8 @@ def exec_curator(config):
 		host = retention['host']
 		prefix = retention['prefix']
 		days = retention['days']
-		print "Calling '/usr/local/bin/curator --host %s delete indices --prefix %s --older-than %d --time-unit days --timestring \'%Y.%m.%d\''" % (host, prefix, days)
-		subprocess.call(["/usr/local/bin/curator", "--host", host, "delete", ,"indices", "--prefix", prefix, "--older-than", str(days), "--time-unit", "days", "--timestring", "'%Y.%m.%d'"])
-
+		print "Calling '/usr/local/bin/curator --host %s delete indices --prefix %s --older-than %d --time-unit days --timestring \'%%Y.%%m.%%d\''" % (host, prefix, days)
+		print subprocess.check_output(["/usr/local/bin/curator", "--host", host, "delete", "indices", "--prefix", prefix, "--older-than", str(days), "--time-unit", "days", "--timestring", "'%Y.%m.%d'"])
 def main():
 	config = parse_configuration_file()
 	exec_curator(config)
