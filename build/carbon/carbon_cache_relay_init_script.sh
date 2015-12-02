@@ -14,6 +14,22 @@ function logInfo ( )
 		echo $@
 	fi	
 }
+
+#######################################################
+# enables log rotation and disable LOGGING for Cache Queue Sorts and Listener Connections
+#######################################################
+function replaceCarbonDefaultLogging ()
+{
+	# substitute ENABLE_LOGROTATION value
+	sed -i "/ENABLE_LOGROTATION = False/c\ENABLE_LOGROTATION = True" /etc/carbon/carbon.conf
+	#TODO-test# sed -i "/ENABLE_LOGROTATION = False/c\ENABLE_LOGROTATION = True" etc_carbon_cache/carbon.conf
+	# substitute LOG_CACHE_QUEUE_SORTS value
+	sed -i "/LOG_CACHE_QUEUE_SORTS = True/c\LOG_CACHE_QUEUE_SORTS = False" /etc/carbon/carbon.conf
+	#TODO-test# sed -i "/LOG_CACHE_QUEUE_SORTS = True/c\LOG_CACHE_QUEUE_SORTS = False" etc_carbon_cache/carbon.conf
+	sed -i "/LOG_LISTENER_CONNECTIONS = True/c\LOG_LISTENER_CONNECTIONS = False" /etc/carbon/carbon.conf
+	#TODO-test# sed -i "/LOG_LISTENER_CONNECTIONS = True/c\LOG_LISTENER_CONNECTIONS = False" etc_carbon_cache/carbon.conf
+}
+
 #######################################################
 # replace default settings in Hera carboncache conf to improve performance
 # NOTE: in your docker-compose, make sure the env variable HERA_CARBON_MAX_CREATES_PER_MINUTE is set to an integer value
@@ -35,20 +51,12 @@ function replaceCarbonCacheConfPerformanceSettings ( )
 		if [ ${HERA_CARBON_MAX_CREATES_PER_MINUTE_NO_WHITE_SPACES} == "" ]; then 			
 			logInfo "WARNING: \$HERA_CARBON_MAX_CREATES_PER_MINUTE env varialble is set to empty, this should have been set to a valid number (2000) in the docker-compose.yml. nothing to do here!"
 		else			
-			# substitute ENABLE_LOGROTATION value
-			sed -i "/ENABLE_LOGROTATION = False/c\ENABLE_LOGROTATION = True" /etc/carbon/carbon.conf
-			#TODO-test# sed -i "/ENABLE_LOGROTATION = False/c\ENABLE_LOGROTATION = True" etc_carbon_cache/carbon.conf
 			# substitute MAX_CREATES_PER_MINUTE value
 			sed -i "/MAX_CREATES_PER_MINUTE = /c\MAX_CREATES_PER_MINUTE = ${HERA_CARBON_MAX_CREATES_PER_MINUTE}" /etc/carbon/carbon.conf
 			#TODO-test# sed -i "/MAX_CREATES_PER_MINUTE = /c\MAX_CREATES_PER_MINUTE = ${HERA_CARBON_MAX_CREATES_PER_MINUTE}" etc_carbon_cache/carbon.conf
 			# substitute USE_INSECURE_UNPICKLER value
 			sed -i "/USE_INSECURE_UNPICKLER = False/c\USE_INSECURE_UNPICKLER = True" /etc/carbon/carbon.conf
 			#TODO-test# sed -i "/USE_INSECURE_UNPICKLER = False/c\USE_INSECURE_UNPICKLER = True" etc_carbon_cache/carbon.conf
-			# substitute LOG_CACHE_QUEUE_SORTS value
-			sed -i "/LOG_CACHE_QUEUE_SORTS = True/c\LOG_CACHE_QUEUE_SORTS = False" /etc/carbon/carbon.conf
-			#TODO-test# sed -i "/LOG_CACHE_QUEUE_SORTS = True/c\LOG_CACHE_QUEUE_SORTS = False" etc_carbon_cache/carbon.conf
-			sed -i "/LOG_LISTENER_CONNECTIONS = True/c\LOG_LISTENER_CONNECTIONS = False" /etc/carbon/carbon.conf
-			#TODO-test# sed -i "/LOG_LISTENER_CONNECTIONS = True/c\LOG_LISTENER_CONNECTIONS = False" etc_carbon_cache/carbon.conf
 		fi
 	fi	
 	
@@ -175,6 +183,9 @@ function replaceCarbonRelayConfDestinationsSettings ( )
 # main logic
 #######################################################
 logInfo 'START CARBON INIT CONFIG SCRIPT!!'
+
+#replace the default Logging options to False
+replaceCarbonDefaultLogging
 
 # relace the carbon relay DESTINATIONS setting
 replaceCarbonRelayConfDestinationsSettings
