@@ -47,6 +47,8 @@ function replaceCarbonCacheConfPerformanceSettings ( )
 			# substitute LOG_CACHE_QUEUE_SORTS value
 			sed -i "/LOG_CACHE_QUEUE_SORTS = True/c\LOG_CACHE_QUEUE_SORTS = False" /etc/carbon/carbon.conf
 			#TODO-test# sed -i "/LOG_CACHE_QUEUE_SORTS = True/c\LOG_CACHE_QUEUE_SORTS = False" etc_carbon_cache/carbon.conf
+			sed -i "/LOG_LISTENER_CONNECTIONS = True/c\LOG_LISTENER_CONNECTIONS = False" /etc/carbon/carbon.conf
+			#TODO-test# sed -i "/LOG_LISTENER_CONNECTIONS = True/c\LOG_LISTENER_CONNECTIONS = False" etc_carbon_cache/carbon.conf
 		fi
 	fi	
 	
