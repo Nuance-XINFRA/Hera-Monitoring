@@ -101,14 +101,13 @@ uchiwa:
 
 sensuclient:
   image: nuancemobility/sensu-client
-  links:
-   - sensu
-   - graphite
-   - screenshoter
   volumes:
    - ./sensu-client/config:/etc/sensu/conf.d
    - ./sensu-client/plugins:/etc/sensu/plugins
    - ./mib:/etc/sensu/mib
+   - /var/run:/var/run:rw
+   - /sys:/sys:ro
+#   - /proc:/proc:ro
   net: host
   privileged: true
 
