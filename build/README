@@ -1,0 +1,6 @@
+The directories that used to be in this location have been moved. Each docker component now has its own GitHub 
+respository under Nuance-Mobility. So, for example, the Ngnix docker build components can be retrieved using
+the URL:
+
+  https://github.com/Nuance-Mobility/docker-nginx.git 
+
